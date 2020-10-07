@@ -1,0 +1,38 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row col-sm-12">
+	<form method="post" action="/Home/Index">
+		<div class="form-group">
+			<label for="name">Name:</label>
+			<input type="text" class="form-control" placeholder="Enter Name" name="name" id="name" required>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<div class="row col-sm-12" style="margin-top:4%">
+	@if (ViewBag.Names.Count != 0)
+	{
+		<table class="table table-strip table-hover">
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in ViewBag.Names)
+				{
+					<tr>
+						<td>@item.Name</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>

@@ -1,0 +1,21 @@
+pip3 install virutalenv
+
+virtualenv env
+
+pip3 install flask flask-sqlalchemy
+
+importing css:
+------------------------------------
+<link rel="stylesheet" href="{{ url_for('mainFolderName', filename='insideFolderName/filename.css' ) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css' ) }}">
+
+
+source env/bin/activate - for linux users
+
+python - for windows users
+
+python app.py
+
+
+
+

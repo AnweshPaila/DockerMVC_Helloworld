@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockermvc_helloworld:
+    image: ${DOCKER_REGISTRY-}dockermvchelloworld
+    build:
+      context: .\DockerMVC_Helloworld
+      dockerfile: Dockerfile

@@ -1,0 +1,46 @@
+docker-compose -f docker-compose.override.yml -f docker-compose.yml config
+docker-compose -f docker-compose.override.yml -f docker-compose.yml build
+
+docker pull microsoft/mssql-server-windows-developer
+
+docker run -d -p 1433:1433 --network nat --name sql -e sa_password=Lenora@123 -e ACCEPT_EULA=Y microsoft/mssql-server-windows-developer
+
+docker ps -a
+docker rm -f [ name of the container ]
+
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" container_id
+
+
+version: '3.4'
+
+services:
+  dockermvc_helloworld:
+    image: ${DOCKER_REGISTRY-}dockermvchelloworld
+    build:
+      context: .\DockerMVC_Helloworld
+      dockerfile: Dockerfile
+    depends_on:
+      - sql
+  sql:
+    image: microsoft/mssql-server-windows-developer
+    environment:
+      - "ACCEPT_EULA='Y'"
+      - "sa_password=Lenora@123"
+
+
+version: '3.4'
+
+services:
+  dockermvc_helloworld:
+    ports:
+      - "80"
+  sql:
+    ports:
+      - "1435:1433"
+networks:
+  default:
+    external:
+      name: nat
+	  
+172.22.112.145 - DB Ip
+	
